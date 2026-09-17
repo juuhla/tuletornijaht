@@ -32,14 +32,13 @@ body{
 }
 .wrap{max-width:880px;margin:0 auto;padding:0 var(--space-4);padding-block:0 var(--space-8)}
 
-/* ---- kaanepilt ---- */
-.cover{display:block;width:100%;height:230px;object-fit:cover;object-position:center 38%;
-       background:var(--sea-100)}
+/* ---- kaanepilt ----
+   Kõrgust ei fikseerita: pilt on juba kaadris 2.1:1 ja näitab tervet torni.
+   Fikseeritud kõrgus + object-fit lõikaks torni tipu igal ekraanilaiusel maha. */
+.cover{display:block;width:100%;height:auto;max-width:100%;background:var(--sea-100)}
 
 /* ---- päis ---- */
 .masthead{padding-block:var(--space-6) var(--space-5);border-bottom:2px solid var(--ink-900)}
-.eyebrow{font-family:var(--font-mono);font-size:11px;line-height:14px;letter-spacing:.12em;
-         text-transform:uppercase;color:var(--signal-700);margin:0 0 10px}
 h1{font-size:clamp(34px,7.5vw,46px);line-height:1;font-weight:700;letter-spacing:-.02em;
    margin:0;text-wrap:balance}
 .lede{margin:14px 0 0;max-width:58ch;color:var(--ink-600)}
@@ -132,18 +131,63 @@ h1{font-size:clamp(34px,7.5vw,46px);line-height:1;font-weight:700;letter-spacing
 .empty{padding:var(--space-5) var(--space-3);color:var(--ink-400);font-size:14px;
        background:var(--surface-card)}
 
+/* ---- kaart ---- */
+/* position+z-index teeb kaardile oma virnastuskonteksti, muidu tõusevad
+   Leafleti juhtnupud (z-index 1000) kleepuva päise peale */
+.map-frame{position:relative;z-index:0;border:1px solid var(--line-200);
+           background:var(--surface-card)}
+#map{height:380px;width:100%;background:var(--sea-100);
+     font-family:var(--font-sans);font-size:13px}
+.map-legend{display:flex;flex-wrap:wrap;gap:var(--space-4);margin:0;
+            padding:var(--space-2) var(--space-3);border-top:1px solid var(--line-200);
+            font-family:var(--font-mono);font-size:10px;line-height:14px;letter-spacing:.12em;
+            text-transform:uppercase;color:var(--ink-400)}
+.map-legend span{display:flex;align-items:center;gap:6px}
+.map-legend .dot{width:11px;height:11px;border-radius:var(--radius-pill);display:block;flex:none}
+.dot-done{background:var(--signal-600);border:2px solid var(--signal-700)}
+.dot-todo{background:var(--surface-card);border:2px solid var(--sea-600)}
+.dot-open{background:var(--surface-card);border:2px solid var(--signal-600);
+          box-shadow:0 0 0 2px var(--sea-100)}
+
+/* Leafleti oma kujundus tokenite peale */
+.leaflet-container{font:inherit;background:var(--sea-100)}
+.leaflet-popup-content-wrapper{border-radius:var(--radius-sm);background:var(--surface-card);
+                               color:var(--ink-900);box-shadow:0 2px 10px rgba(18,36,46,.18)}
+.leaflet-popup-tip{background:var(--surface-card)}
+.leaflet-popup-content{margin:0;width:200px!important}
+.pop{padding:var(--space-3)}
+.pop img{display:block;width:100%;height:auto;border-radius:var(--radius-md);
+         margin-bottom:var(--space-2);background:var(--sea-100)}
+.pop .pop-nm{font-size:15px;line-height:20px;font-weight:600;letter-spacing:-.005em;
+             color:var(--ink-900)}
+.pop .pop-loc{display:block;font-family:var(--font-mono);font-size:11px;line-height:15px;
+              letter-spacing:.02em;color:var(--ink-400);margin-top:3px}
+.pop .pop-state{display:inline-block;margin-top:var(--space-2);font-family:var(--font-mono);
+                font-size:10px;line-height:14px;letter-spacing:.12em;text-transform:uppercase;
+                border:1px solid currentColor;padding:1px 6px;border-radius:var(--radius-pill)}
+.pop .is-done{color:var(--signal-700)}
+.pop .is-todo{color:var(--ink-400)}
+.pop .pop-credit{display:block;margin-top:var(--space-2);font-family:var(--font-mono);
+                 font-size:9.5px;line-height:13px;color:var(--ink-400)}
+.leaflet-control-attribution{font-family:var(--font-mono);font-size:9px;
+                             background:rgba(255,255,255,.82);color:var(--ink-400)}
+.leaflet-control-attribution a{color:var(--sea-600)}
+.leaflet-bar a{color:var(--ink-900);border-radius:0}
+
 footer{margin-top:var(--space-8);padding-top:var(--space-4);border-top:1px solid var(--line-200);
        color:var(--ink-400);font-size:13px;line-height:18px}
 footer p{margin:0 0 6px;max-width:64ch}
+footer .credits{font-family:var(--font-mono);font-size:10.5px;line-height:16px;color:var(--ink-400)}
+footer .credits a{color:var(--sea-600)}
 .reset{background:none;border:none;padding:0;color:var(--ink-400);cursor:pointer;font:inherit;
        text-decoration:underline;text-underline-offset:2px}
 .reset:hover{color:var(--signal-700)}
 
 @media (max-width:560px){
-  .cover{height:160px}
+  #map{height:300px}
   .lh{grid-template-columns:24px 22px 1fr;gap:10px}
   .tower{height:44px}
-  .shot{display:none}
+  .shot{width:64px;height:44px}
   .memo{padding-left:68px}
   .nm{font-size:16.5px}
 }

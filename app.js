@@ -7,6 +7,18 @@
   var LS = "tuletornijaht.v2";
   var BADGES = { paat: ["b-boat", "Ainult paadiga"], jalgsi: ["b-walk", "Matkarada"] };
 
+  /* Kõik failiteed lahendatakse dokumendi enda aadressi vastu. Nii töötavad
+     nad ühtviisi kohalikus kaustas ja GitHub Pagesi alamkaustas
+     (nt https://kasutaja.github.io/tuletornijaht/). Absoluutne tee "/images/..."
+     osutaks Pagesis domeeni juurde ja annaks 404. */
+  function url(path) {
+    try {
+      return new URL(String(path).replace(/^\.?\//, ""), document.baseURI).href;
+    } catch (e) {
+      return path;
+    }
+  }
+
   var state = { visited: {} };
   try {
     var raw = localStorage.getItem(LS);
@@ -22,6 +34,36 @@
 
   function num(v) { return String(v).replace(".", ","); }
 
+  /* Võõra foto juures peab autor ja litsents olema näha. Julia enda
+     piltidel krediidirida ei ole. */
+  function creditText(it) {
+    if (!it.foto || !it.foto_autor || it.foto_autor === "Julia") return "";
+    return "Foto: " + it.foto_autor + (it.foto_litsents ? " / " + it.foto_litsents : "");
+  }
+
+  /* Kõik võõraste fotode viited kogutakse jalusesse ühte loendisse -
+     nimekirja read on liiga tihedad, et iga pildi alla rida mahutada. */
+  function buildCredits() {
+    var host = document.getElementById("fotokrediit");
+    if (!host) return;
+    var items = ALL.filter(function (it) { return creditText(it); });
+    if (!items.length) { host.hidden = true; return; }
+    host.hidden = false;
+    host.textContent = "Fotod: ";
+    items.forEach(function (it, i) {
+      if (i) host.appendChild(document.createTextNode(" · "));
+      var a = document.createElement(it.foto_allikas ? "a" : "span");
+      a.textContent = it.nimi + " - " + it.foto_autor +
+                      (it.foto_litsents ? ", " + it.foto_litsents : "");
+      if (it.foto_allikas) {
+        a.href = it.foto_allikas;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+      }
+      host.appendChild(a);
+    });
+  }
+
   var main = document.getElementById("main");
   var doneEl = document.getElementById("done");
   var totalEl = document.getElementById("total");
@@ -30,14 +72,15 @@
   var openEl = document.getElementById("openstat");
 
   var REGIONS = [];
-  var ALL = [];
+  var ALL = [];            /* kõik read, kaasa arvatud endised tornid */
+  var OFFICIAL = [];       /* ainult Transpordiameti nimekirja 55 tuletorni */
   var rowEls = {};
   var TOTAL = 0;
   var OPEN_TOTAL = 0;
   var filter = "all";
   var query = "";
 
-  fetch("tuletornid.json")
+  fetch(url("tuletornid.json"))
     .then(function (r) {
       if (!r.ok) throw new Error(r.status);
       return r.json();
@@ -45,16 +88,23 @@
     .then(function (data) {
       REGIONS = data.piirkonnad || [];
       REGIONS.forEach(function (g) {
+        var ametlik = g.ametlik !== false;
         (g.tuletornid || []).forEach(function (it) {
           it.piirkond = g.nimi;
+          it.ametlik = ametlik;
           ALL.push(it);
+          if (ametlik) OFFICIAL.push(it);
         });
       });
-      TOTAL = ALL.length;
-      OPEN_TOTAL = ALL.filter(function (i) { return i.avatud; }).length;
+      /* Loendur räägib ainult ametlikust nimekirjast; endised tornid on
+         omaette sektsioon ja ei tohi koguarvu paisutada. */
+      TOTAL = OFFICIAL.length;
+      OPEN_TOTAL = OFFICIAL.filter(function (i) { return i.avatud; }).length;
       totalEl.textContent = TOTAL;
       barEl.setAttribute("aria-valuemax", TOTAL);
       build();
+      buildMap();
+      buildCredits();
       applyAll();
       refreshTotals();
       applyFilter();
@@ -151,10 +201,16 @@
     }
     body.appendChild(hd);
 
+    /* Andmerida ehitatakse ainult olemasolevatest väljadest - tühja välja
+       kohta ei kirjutata midagi ega tuletata. */
     var meta = document.createElement("span");
     meta.className = "meta";
-    var bits = [it.asukoht, it.aasta + ".", "torn " + num(it.korgus_m) + " m"];
+    var bits = [];
+    if (it.asukoht) bits.push(it.asukoht);
+    if (it.aasta) bits.push(it.aasta + ".");
+    if (it.korgus_m) bits.push("torn " + num(it.korgus_m) + " m");
     if (it.tulekorgus_m) bits.push("tuli " + num(it.tulekorgus_m) + " m üle mere");
+    if (it.tuup && it.tuup !== "Tuletorn") bits.push(it.tuup.replace(/^Tuletorn,\s*/, ""));
     if (it.margi_nr) bits.push("nr " + it.margi_nr);
     meta.textContent = bits.join("  ·  ");
     body.appendChild(meta);
@@ -169,9 +225,16 @@
     if (it.foto) {
       var img = document.createElement("img");
       img.className = "shot";
-      img.src = it.foto;
+      img.src = url(it.foto);
       img.alt = it.nimi;
       img.loading = "lazy";
+      var c = creditText(it);
+      if (c) img.title = it.nimi + " - " + c;
+      img.addEventListener("error", function () {
+        /* Puuduv pilt ei tohi jätta katkist ikooni rea serva. */
+        img.remove();
+        if (window.console) console.warn("Fotot ei leitud:", img.src);
+      });
       lab.appendChild(img);
     }
     row.appendChild(lab);
@@ -213,6 +276,138 @@
     return row;
   }
 
+  /* ---------- kaart ----------
+     Markerid ehitatakse samast ALL massiivist, mis nimekiri - teist
+     tornide loendit projektis ei ole. */
+
+  var map = null;
+  var markers = {};
+  var mapCountEl = document.getElementById("mapcount");
+
+  var STYLE_TODO = {
+    radius: 6, weight: 2, color: "#1f6e92", fillColor: "#ffffff", fillOpacity: 1
+  };
+  var STYLE_DONE = {
+    radius: 7, weight: 2, color: "#96222a", fillColor: "#c0323a", fillOpacity: 1
+  };
+
+  function markerStyle(it) {
+    var base = state.visited[it.id] ? STYLE_DONE : STYLE_TODO;
+    var s = {
+      radius: base.radius, weight: base.weight, color: base.color,
+      fillColor: base.fillColor, fillOpacity: base.fillOpacity
+    };
+    /* Avatud torn saab jämedama ringi - sama mõte mis nimekirja sildil. */
+    if (it.avatud) {
+      s.weight = 3;
+      if (!state.visited[it.id]) s.color = "#c0323a";
+    }
+    return s;
+  }
+
+  function popupContent(it) {
+    var box = document.createElement("div");
+    box.className = "pop";
+
+    if (it.foto) {
+      var img = document.createElement("img");
+      img.src = url(it.foto);
+      img.alt = it.nimi;
+      img.loading = "lazy";
+      img.addEventListener("error", function () { img.remove(); });
+      box.appendChild(img);
+    }
+
+    var nm = document.createElement("div");
+    nm.className = "pop-nm";
+    nm.textContent = it.nimi;
+    box.appendChild(nm);
+
+    var loc = document.createElement("span");
+    loc.className = "pop-loc";
+    var locBits = [];
+    if (it.asukoht) locBits.push(it.asukoht);
+    if (it.aasta) locBits.push(it.aasta + ".");
+    if (!locBits.length && it.margi_nr) locBits.push("nr " + it.margi_nr);
+    loc.textContent = locBits.join("  ·  ");
+    box.appendChild(loc);
+
+    var credit = creditText(it);
+    if (credit) {
+      var cr = document.createElement(it.foto_allikas ? "a" : "span");
+      cr.className = "pop-credit";
+      cr.textContent = credit;
+      if (it.foto_allikas) {
+        cr.href = it.foto_allikas;
+        cr.target = "_blank";
+        cr.rel = "noopener noreferrer";
+      }
+      box.appendChild(cr);
+    }
+
+    var st = document.createElement("span");
+    var done = !!state.visited[it.id];
+    st.className = "pop-state " + (done ? "is-done" : "is-todo");
+    st.textContent = done ? "Käidud" : "Käimata";
+    box.appendChild(st);
+
+    return box;
+  }
+
+  function buildMap() {
+    var host = document.getElementById("map");
+    if (!host) return;
+
+    if (typeof L === "undefined") {
+      host.style.height = "auto";
+      var note = document.createElement("p");
+      note.className = "empty";
+      note.textContent = "Kaardi teeki (Leaflet) ei õnnestunud laadida. Kontrolli internetiühendust - nimekiri töötab ka ilma kaardita.";
+      host.appendChild(note);
+      return;
+    }
+
+    map = L.map(host, {
+      scrollWheelZoom: false,   /* et pika lehe kerimine kaardi kohal ei kinni jääks */
+      zoomControl: true
+    });
+    map.on("click", function () { map.scrollWheelZoom.enable(); });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 17,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> kaastöölised'
+    }).addTo(map);
+
+    var pts = [];
+    ALL.forEach(function (it) {
+      if (typeof it.lat !== "number" || typeof it.lng !== "number") return;
+      var m = L.circleMarker([it.lat, it.lng], markerStyle(it));
+      m.bindPopup(function () { return popupContent(it); }, {
+        closeButton: true, autoPanPadding: [24, 24]
+      });
+      m.bindTooltip(it.nimi, { direction: "top", offset: [0, -6] });
+      m.addTo(map);
+      markers[it.id] = m;
+      pts.push([it.lat, it.lng]);
+    });
+
+    if (pts.length) map.fitBounds(pts, { padding: [28, 28] });
+    else map.setView([58.7, 24.5], 7);
+
+    /* Kaart ehitatakse peidetud mõõtmetega konteinerisse harva, aga
+       kindluse mõttes arvutame suuruse pärast paigutust üle. */
+    setTimeout(function () { map.invalidateSize(); }, 200);
+  }
+
+  function refreshMarker(id) {
+    var m = markers[id];
+    if (!m) return;
+    var it = rowEls[id] && rowEls[id].item;
+    if (!it) return;
+    m.setStyle(markerStyle(it));
+    if (m.isPopupOpen && m.isPopupOpen()) m.setPopupContent(popupContent(it));
+  }
+
   /* ---------- olek ---------- */
 
   function applyRow(id) {
@@ -223,6 +418,7 @@
     r.chk.checked = !!v;
     var note = v && v.note ? v.note : "";
     if (document.activeElement !== r.memo && r.memo.value !== note) r.memo.value = note;
+    refreshMarker(id);
   }
 
   function applyAll() {
@@ -231,13 +427,14 @@
 
   function refreshTotals() {
     var n = 0, openN = 0;
-    ALL.forEach(function (it) {
+    OFFICIAL.forEach(function (it) {
       if (state.visited[it.id]) { n++; if (it.avatud) openN++; }
     });
     doneEl.textContent = n;
     barEl.setAttribute("aria-valuenow", n);
     barFill.style.width = (TOTAL ? (n / TOTAL * 100) : 0) + "%";
     openEl.textContent = "Avatud tornidest: " + openN + " / " + OPEN_TOTAL;
+    if (mapCountEl) mapCountEl.textContent = n + "/" + TOTAL;
     REGIONS.forEach(function (g) {
       var c = 0;
       (g.tuletornid || []).forEach(function (it) { if (state.visited[it.id]) c++; });

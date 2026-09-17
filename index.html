@@ -6,6 +6,7 @@
 <title>Eesti tuletornijaht</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,17 +15,16 @@
 
 <div class="wrap">
   <header class="masthead">
-    <p class="eyebrow">Navigatsioonimärgid · Läänemeri ja Peipsi</p>
     <h1>Eesti tuletornijaht</h1>
-    <p class="lede">Nelikümmend tuletorni ja tulepaaki Narva jõe suudmest Ruhnuni ning Peipsi kaldal. Märgi linnuke torni juurde, kus oled käinud — valik jääb sellesse brauserisse alles.</p>
+    <p class="lede">Kõik 55 Transpordiameti nimekirja tuletorni Narva jõe suudmest Ruhnuni ning Peipsi kaldal, pluss viis vana torni omaette. Märgi linnuke torni juurde, kus oled käinud - valik jääb sellesse brauserisse alles.</p>
   </header>
 
   <div class="meter">
     <div class="meter-top">
-      <div class="count"><b id="done">0</b> / <span id="total">40</span> tuletorni</div>
+      <div class="count"><b id="done">0</b> / <span id="total">55</span> tuletorni</div>
       <div class="sub" id="openstat">Avatud tornidest: 0 / 13</div>
     </div>
-    <div class="beam" role="progressbar" aria-labelledby="done" aria-valuemin="0" aria-valuemax="40" aria-valuenow="0" id="bar"><i></i></div>
+    <div class="beam" role="progressbar" aria-labelledby="done" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0" id="bar"><i></i></div>
     <div class="controls">
       <div class="chips" role="group" aria-label="Filter">
         <button class="chip" data-f="all" aria-pressed="true">Kõik</button>
@@ -36,15 +36,30 @@
     </div>
   </div>
 
+  <section class="region map-section">
+    <h2><span>Kaart</span><span class="rc" id="mapcount">0/55</span></h2>
+    <p>Kõik nimekirja tornid kaardil. Punane täpp tähendab, et oled seal käinud. Vajuta täpile, et näha, mis torn see on.</p>
+    <div class="map-frame">
+      <div id="map" role="application" aria-label="Eesti tuletornide kaart"></div>
+      <p class="map-legend">
+        <span><i class="dot dot-done"></i>Käidud</span>
+        <span><i class="dot dot-todo"></i>Käimata</span>
+        <span><i class="dot dot-open"></i>Avatud külastajatele</span>
+      </p>
+    </div>
+  </section>
+
   <main id="main"></main>
 
   <footer>
-    <p>„Avatud“ tähendab, et Transpordiameti navigatsioonimärkide registri järgi saab torni külastada — lahtiolekuajad sõltuvad hooajast ja haldajast. Kõrgus on torni enda kõrgus alusest, tulekõrgus on mõõdetud merepinnast.</p>
+    <p>„Avatud“ tähendab, et Transpordiameti navigatsioonimärkide registri järgi saab torni külastada - lahtiolekuajad sõltuvad hooajast ja haldajast. Kõrgus on torni enda kõrgus alusest, tulekõrgus on mõõdetud merepinnast.</p>
     <p>Linnukesed ja märkmed on salvestatud ainult sellesse brauserisse. Teises seadmes või pärast brauseri andmete kustutamist on nimekiri jälle tühi.</p>
+    <p class="credits" id="fotokrediit" hidden></p>
     <p><button class="reset" id="reset" type="button">Tühjenda kõik linnukesed</button></p>
   </footer>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

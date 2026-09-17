@@ -141,6 +141,30 @@ Neli teineteist välistavat nuppu ja otsinguväli. Valitud nupp on
 ainult käidud torni. Otsing kitsendab seda, mille filter on juba valinud.
 Tühja tulemuse puhul jääb sektsiooni pealkiri alles ja alla tuleb üks lause.
 
+### Kaart
+
+Leaflet + OpenStreetMap, markerid tulevad samast `tuletornid.json`-ist mis
+nimekiri — teist tornide loendit projektis ei ole ja ei tohi tekkida.
+
+Markerid on `circleMarker`, mitte pildinõelad: nii saab värv tulla otse
+tokenitest ja kaart jääb nimekirjaga ühte keelde.
+
+| Olek | Täide | Ring |
+| --- | --- | --- |
+| Käimata | `--surface-card` | `--sea-600`, 2px |
+| Käidud | `--signal-600` | `--signal-700`, 2px |
+| Avatud külastajatele | nagu ülal | 3px, ring `--signal-600` |
+
+Punane tähendab kaardil sedasama mis nimekirjas: siin on käidud. Kui
+linnuke reas muutub, muutub marker kohe — mõlemad loevad sama
+`localStorage` olekut.
+
+Hüpikaken on kitsas (200px): foto kui on, nimi, asukoht aastaga ja
+külastusoleku silt. Muud infot sinna ei panda — üksikasjad on nimekirjas.
+
+Kerimisratas on kaardil vaikimisi välja lülitatud ja lülitub sisse alles
+pärast klõpsu, muidu jääb pikk leht kaardi kohal kinni.
+
 ### Edenemisriba
 
 Suur arv `--signal-600` värvi tabular-nums arvudega, nimetaja tavalises
@@ -153,8 +177,16 @@ edenemisest.
 ## Pildid
 
 Fotod on Julia omad, autorit eraldi välja ei kirjutata. Kaanepilt on
-nurgeline ja jookseb lehe serva (`object-fit: cover`), rea pisipilt on
-`--radius-md` nurkadega, 96×64 ekraanil ja 200×134 failis.
+nurgeline ja jookseb lehe serva; selle kõrgust **ei fikseerita** (`height:
+auto`), sest fikseeritud kõrgus koos `object-fit: cover`-iga lõikas torni
+tipu maha. Kaader on failis juba 2.1:1 ja sisaldab tervet torni. Rea
+pisipilt on `--radius-md` nurkadega, 96×64 laual ja 64×44 telefonis.
+
+Kõik pildi- ja andmeteed on **suhtelised** ja lahendatakse dokumendi
+aadressi vastu (`new URL(tee, document.baseURI)`). Absoluutne tee
+`/images/...` töötaks kohapeal, aga annaks GitHub Pagesi alamkaustas
+(`/tuletornijaht/`) 404. Kui foto ei lae, eemaldab `onerror` pildi ja
+kirjutab konsooli otsitud aadressi.
 
 Fotole teksti peale ei kirjutata ja filtreid ei panda. Uue foto lisamisel
 hoia JPEG kvaliteet 74–78 kandis ja pikem külg alla 1400px, seejärel kirjuta
@@ -167,9 +199,34 @@ Kaustas `images/` on ka kolm fotot, mille torn on veel määramata
 
 | Fail | Mis seal on |
 | --- | --- |
-| `index.html` | Lehe skelett: kaanepilt, päis, loendur, filtririba, jalus |
-| `styles.css` | Tokenid `:root`-is ja kõik komponendid |
-| `app.js` | Andmete laadimine, ridade ehitamine, filter, localStorage |
+| `index.html` | Lehe skelett: kaanepilt, päis, loendur, filtririba, kaart, jalus |
+| `styles.css` | Tokenid `:root`-is ja kõik komponendid, kaasa arvatud kaart |
+| `app.js` | Andmete laadimine, ridade ehitamine, kaart, filter, localStorage |
 | `tuletornid.json` | Kõik 40 torni piirkondade kaupa — ainus andmeallikas |
 | `images/` | Kaanepilt ja ridade pisipildid |
+| `.nojekyll` | Ütleb GitHub Pagesile, et faile ei töödeldaks Jekylliga |
 | `DESIGN.md` | See fail |
+
+Iga torni kirjes on ka `lat` ja `lng` (WGS84 kraadides) — uut torni lisades
+võta koordinaadid ametlikust allikast, ära pane silma järgi.
+
+## Mis on ametlik ja mis mitte
+
+`tuletornid.json` on kaheosaline. Viis esimest piirkonda on `ametlik: true`
+ja sisaldavad täpselt neid **55 tuletorni**, mis on Transpordiameti
+tuletornide nimekirjas. Loendur, edenemisriba ja „Avatud tornidest“ loevad
+ainult neid. Kuues piirkond on `ametlik: false` — vanad ja endised tornid,
+mis registris ei ole. Nad on nimekirjas ja kaardil, aga koguarvu ei muuda.
+
+Nimi, `margi_nr`, `tuup` ja `avatud` tulevad Transpordiameti nimekirjast ja
+neid ei kirjutata ümber „ilusamaks“. **Tühi väli tähendab, et andmet ei
+leitud ametlikust allikast.** Andmerida jätab tühja välja lihtsalt vahele —
+ära täida seda oletusega.
+
+## Fotode väljad
+
+`foto` on suhteline tee projektis (`images/...`), `foto_autor`,
+`foto_allikas` ja `foto_litsents` kuuluvad kokku. Julia enda piltidel on
+autor „Julia“ ja krediidirida ei näidata. Võõra foto puhul peavad autor ja
+litsents olema pildi juures näha — hüpikaken kuvab need automaatselt, kui
+`foto_autor` ei ole „Julia“ ja `foto_litsents` on täidetud.
