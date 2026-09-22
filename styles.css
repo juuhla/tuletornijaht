@@ -33,12 +33,10 @@ body{
 .wrap{max-width:880px;margin:0 auto;padding:0 var(--space-4);padding-block:0 var(--space-8)}
 
 /* ---- kaanepilt ----
-   Pilt on lai kaader (2.78:1), kus torni tipu kohal on meelega ruumi.
-   Riba kõrgus on piiratud, et esimene ekraan ei kuluks ainult fotole;
-   object-position hoiab torni kaadris ka kitsal ja väga laial ekraanil. */
-.cover{display:block;width:100%;max-width:100%;
-       height:clamp(190px,25vw,360px);
-       object-fit:cover;object-position:68% 12%;
+   Pilt on kaadris tervikuna: laius on sama mis tekstiveerul ja korgus
+   arvutatakse pildi enda kulgsuhtest. Nii ei loigata torni tippu ega jalga
+   ara ei kitsal ega vaga laial ekraanil. */
+.cover{display:block;width:100%;max-width:880px;margin-inline:auto;height:auto;
        background:var(--sea-100)}
 
 /* ---- päis ---- */
