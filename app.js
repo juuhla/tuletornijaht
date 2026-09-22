@@ -34,10 +34,10 @@
 
   function num(v) { return String(v).replace(".", ","); }
 
-  /* Võõra foto juures peab autor ja litsents olema näha. Julia enda
-     piltidel krediidirida ei ole. */
+  /* Iga foto juures peab autor ja litsents olema näha - ka oma piltidel,
+     sest needki on litsentsitud (CC BY 4.0). */
   function creditText(it) {
-    if (!it.foto || !it.foto_autor || it.foto_autor === "Julia") return "";
+    if (!it.foto || !it.foto_autor) return "";
     return "Foto: " + it.foto_autor + (it.foto_litsents ? " / " + it.foto_litsents : "");
   }
 
@@ -62,6 +62,22 @@
       }
       host.appendChild(a);
     });
+  }
+
+  /* Andmeallikad jalusesse. Loend tuleb failist tuletornid.json, et
+     allikad ja andmed ei saaks lahku minna. */
+  function buildSources(list) {
+    var host = document.getElementById("andmeallikad");
+    if (!host || !list || !list.length) return;
+    var ul = document.createElement("ul");
+    ul.className = "src-list";
+    list.forEach(function (s) {
+      var li = document.createElement("li");
+      li.textContent = s;
+      ul.appendChild(li);
+    });
+    host.hidden = false;
+    host.appendChild(ul);
   }
 
   var main = document.getElementById("main");
@@ -105,6 +121,7 @@
       build();
       buildMap();
       buildCredits();
+      buildSources(data.allikad);
       applyAll();
       refreshTotals();
       applyFilter();
@@ -358,6 +375,15 @@
     var host = document.getElementById("map");
     if (!host) return;
 
+    /* Kaardi kõige sagedasem tõrge ei ole Leaflet ise, vaid see, et
+       konteiner on 0 pikslit kõrge - siis joonistab Leaflet kaardi
+       korralikult valmis, aga näha ei ole midagi. See juhtub, kui
+       styles.css on brauseri vahemälus vana või jäi üles laadimata.
+       Anname konteinerile kõrguse enne kaardi loomist. */
+    if (host.getBoundingClientRect().height < 120) {
+      host.style.height = (window.innerWidth <= 560 ? 300 : 380) + "px";
+    }
+
     if (typeof L === "undefined") {
       host.style.height = "auto";
       var note = document.createElement("p");
@@ -394,9 +420,23 @@
     if (pts.length) map.fitBounds(pts, { padding: [28, 28] });
     else map.setView([58.7, 24.5], 7);
 
-    /* Kaart ehitatakse peidetud mõõtmetega konteinerisse harva, aga
-       kindluse mõttes arvutame suuruse pärast paigutust üle. */
-    setTimeout(function () { map.invalidateSize(); }, 200);
+    /* Suurus arvutatakse üle siis, kui paigutus on paigas: kohe pärast
+       renderdust, pärast fontide ja kaanepildi laadimist ning akna või
+       telefoni pööramise järel. Muidu jääb kaart poolikult joonistatuks. */
+    var resizePending = false;
+    function resize() {
+      if (!map || resizePending) return;
+      resizePending = true;
+      setTimeout(function () {
+        resizePending = false;
+        if (map) map.invalidateSize();
+      }, 120);
+    }
+    resize();
+    window.addEventListener("load", resize);
+    window.addEventListener("resize", resize);
+    window.addEventListener("orientationchange", resize);
+    if (window.ResizeObserver) new ResizeObserver(resize).observe(host);
   }
 
   function refreshMarker(id) {

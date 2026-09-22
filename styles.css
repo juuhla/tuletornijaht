@@ -33,27 +33,31 @@ body{
 .wrap{max-width:880px;margin:0 auto;padding:0 var(--space-4);padding-block:0 var(--space-8)}
 
 /* ---- kaanepilt ----
-   Kõrgust ei fikseerita: pilt on juba kaadris 2.1:1 ja näitab tervet torni.
-   Fikseeritud kõrgus + object-fit lõikaks torni tipu igal ekraanilaiusel maha. */
-.cover{display:block;width:100%;height:auto;max-width:100%;background:var(--sea-100)}
+   Pilt on lai kaader (2.78:1), kus torni tipu kohal on meelega ruumi.
+   Riba kõrgus on piiratud, et esimene ekraan ei kuluks ainult fotole;
+   object-position hoiab torni kaadris ka kitsal ja väga laial ekraanil. */
+.cover{display:block;width:100%;max-width:100%;
+       height:clamp(190px,25vw,360px);
+       object-fit:cover;object-position:68% 12%;
+       background:var(--sea-100)}
 
 /* ---- päis ---- */
-.masthead{padding-block:var(--space-6) var(--space-5);border-bottom:2px solid var(--ink-900)}
-h1{font-size:clamp(34px,7.5vw,46px);line-height:1;font-weight:700;letter-spacing:-.02em;
+.masthead{padding-block:var(--space-4) var(--space-3);border-bottom:2px solid var(--ink-900)}
+h1{font-size:clamp(28px,5.4vw,38px);line-height:1.04;font-weight:700;letter-spacing:-.02em;
    margin:0;text-wrap:balance}
-.lede{margin:14px 0 0;max-width:58ch;color:var(--ink-600)}
+.lede{margin:8px 0 0;max-width:62ch;color:var(--ink-600);font-size:14px;line-height:20px}
 
 /* ---- loendur ---- */
 .meter{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface-page);
-       padding-block:var(--space-3);border-bottom:1px solid var(--line-200);
+       padding-block:10px;border-bottom:1px solid var(--line-200);
        box-shadow:var(--shadow-sticky)}
 .meter-top{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-3);
            flex-wrap:wrap}
-.count{font-size:22px;line-height:30px;font-weight:700;letter-spacing:-.015em}
-.count b{color:var(--signal-600);font-size:28px;font-weight:700;font-variant-numeric:tabular-nums}
+.count{font-size:19px;line-height:26px;font-weight:700;letter-spacing:-.015em}
+.count b{color:var(--signal-600);font-size:25px;font-weight:700;font-variant-numeric:tabular-nums}
 .sub{font-family:var(--font-mono);font-size:11.5px;line-height:16px;letter-spacing:.02em;
      color:var(--ink-400);font-variant-numeric:tabular-nums}
-.beam{position:relative;height:8px;margin-top:10px;background:var(--surface-sunk);
+.beam{position:relative;height:7px;margin-top:8px;background:var(--surface-sunk);
       border:1px solid var(--line-200);overflow:hidden}
 .beam i{display:block;height:100%;width:0;
         background:linear-gradient(90deg,var(--sea-900),var(--sea-600) 55%,var(--signal-600));
@@ -61,7 +65,7 @@ h1{font-size:clamp(34px,7.5vw,46px);line-height:1;font-weight:700;letter-spacing
 @media (prefers-reduced-motion:reduce){.beam i{transition:none}}
 
 /* ---- juhtelemendid ---- */
-.controls{display:flex;gap:var(--space-2);flex-wrap:wrap;align-items:center;margin-top:var(--space-3)}
+.controls{display:flex;gap:var(--space-2);flex-wrap:wrap;align-items:center;margin-top:10px}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{font-family:var(--font-mono);font-size:11px;line-height:14px;letter-spacing:.12em;
       text-transform:uppercase;padding:6px 11px;border:1px solid var(--line-300);
@@ -78,7 +82,10 @@ h1{font-size:clamp(34px,7.5vw,46px);line-height:1;font-weight:700;letter-spacing
       outline:2px solid var(--signal-600);outline-offset:2px}
 
 /* ---- piirkonnad ---- */
-.region{margin-top:var(--space-6)}
+.region{margin-top:var(--space-5)}
+/* Kaardi plokk tuleb kohe loenduri järel - hoiame selle vahe väiksena,
+   et kaart algaks juba esimesel ekraanil. */
+.map-section{margin-top:var(--space-4)}
 .region h2{font-size:15px;line-height:20px;font-weight:600;letter-spacing:.06em;
            text-transform:uppercase;margin:0 0 2px;display:flex;align-items:baseline;gap:10px}
 .region h2 .rc{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.02em;
@@ -136,7 +143,10 @@ h1{font-size:clamp(34px,7.5vw,46px);line-height:1;font-weight:700;letter-spacing
    Leafleti juhtnupud (z-index 1000) kleepuva päise peale */
 .map-frame{position:relative;z-index:0;border:1px solid var(--line-200);
            background:var(--surface-card)}
-#map{height:380px;width:100%;background:var(--sea-100);
+/* Konteineril PEAB olema selge kõrgus - Leaflet ei oska seda ise arvutada
+   ja 0-kõrgusega konteineri puhul ei ilmu kaarti üldse. Sama kõrgus on
+   turvavõrguna kirjas ka index.html-i sees. */
+#map{height:380px;min-height:340px;width:100%;background:var(--sea-100);
      font-family:var(--font-sans);font-size:13px}
 .map-legend{display:flex;flex-wrap:wrap;gap:var(--space-4);margin:0;
             padding:var(--space-2) var(--space-3);border-top:1px solid var(--line-200);
@@ -179,12 +189,21 @@ footer{margin-top:var(--space-8);padding-top:var(--space-4);border-top:1px solid
 footer p{margin:0 0 6px;max-width:64ch}
 footer .credits{font-family:var(--font-mono);font-size:10.5px;line-height:16px;color:var(--ink-400)}
 footer .credits a{color:var(--sea-600)}
+/* ---- allikad ja litsentsid ---- */
+.sources{margin-top:var(--space-5);padding-top:var(--space-4);border-top:1px solid var(--line-200)}
+.sources h3{margin:0 0 6px;font-size:13px;line-height:18px;color:var(--ink-600);
+            text-transform:uppercase;letter-spacing:.08em}
+.src-list{margin:0 0 8px;padding-left:18px;max-width:64ch}
+.src-list li{margin-bottom:3px}
+
 .reset{background:none;border:none;padding:0;color:var(--ink-400);cursor:pointer;font:inherit;
        text-decoration:underline;text-underline-offset:2px}
 .reset:hover{color:var(--signal-700)}
 
 @media (max-width:560px){
-  #map{height:300px}
+  #map{height:300px;min-height:280px}
+  .lede{font-size:13.5px;line-height:19px}
+  .masthead{padding-block:var(--space-3) 10px}
   .lh{grid-template-columns:24px 22px 1fr;gap:10px}
   .tower{height:44px}
   .shot{width:64px;height:44px}

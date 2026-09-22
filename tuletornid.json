@@ -1,6 +1,6 @@
 {
   "versioon": 3,
-  "uuendatud": "2026-09-17",
+  "uuendatud": "2026-09-22",
   "kirjeldus": "Eesti tuletornid kontrollnimekirja jaoks. Ametlik osa järgib Transpordiameti tuletornide nimekirja: 55 tuletorni. Kõrgus on torni kõrgus aluspinnast, tulekõrgus on tule kõrgus merepinnast või navigatsioonikaardi nulltasemest.",
   "allikad": [
     "Transpordiamet, Tuletornide nimekiri (nma.transpordiamet.ee/open_lighthouses/) - nimed, margi_nr, tuup, avatud",
@@ -30,10 +30,11 @@
           "tuup": "Tuletorn",
           "ligipaas": null,
           "foto": "images/narva-joesuu.jpg",
-          "foto_autor": "Julia",
+          "foto_autor": "Ilja Smirnov",
           "foto_allikas": "",
-          "foto_litsents": "",
-          "kirjeldus": "Punavalge betoontorn Narva jõe suudme lähedal männimetsas; praegune torn püstitati sõjas hävinud eelkäija asemele."
+          "foto_litsents": "CC BY 4.0",
+          "kirjeldus": "Punavalge betoontorn Narva jõe suudme lähedal männimetsas; praegune torn püstitati sõjas hävinud eelkäija asemele.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/4.0/"
         },
         {
           "id": "letipea",
@@ -51,8 +52,9 @@
           "foto": "images/letipea.jpg",
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Letipea_tuletorn_2008.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Neeme tipus, kust avaneb vaade Kunda lahele; lähedal lebab hiiglaslik Ehalkivi."
+          "foto_litsents": "CC BY 3.0",
+          "kirjeldus": "Neeme tipus, kust avaneb vaade Kunda lahele; lähedal lebab hiiglaslik Ehalkivi.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         },
         {
           "id": "vaindloo",
@@ -71,7 +73,8 @@
           "foto_autor": "Jaan Künnap",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Vaindloo_tuletorn_%282023%29_%2803%29.jpg",
           "foto_litsents": "CC BY-SA 4.0",
-          "kirjeldus": "Väikesel laiul Soome lahes - Vaindloo on Eesti kõige põhjapoolsem punkt."
+          "kirjeldus": "Väikesel laiul Soome lahes - Vaindloo on Eesti kõige põhjapoolsem punkt.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by-sa/4.0"
         },
         {
           "id": "vergi",
@@ -108,8 +111,9 @@
           "foto": "images/mohni.jpg",
           "foto_autor": "Ivo Kruusamägi",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Mohni_tuletorn_2011._aastal.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Metsase saare kohal Pärispea poolsaare põhjas; saarele pääseb suvel väikelaevaga."
+          "foto_litsents": "CC BY-SA 3.0 ee",
+          "kirjeldus": "Metsase saare kohal Pärispea poolsaare põhjas; saarele pääseb suvel väikelaevaga.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by-sa/3.0/ee/deed.en"
         },
         {
           "id": "juminda",
@@ -127,8 +131,9 @@
           "foto": "images/juminda.jpg",
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Juminda_tuletorn_2007.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Poolsaare tipus, mille lähedal toimus 1941. aasta augustis Juminda miinilahing; neemel on mälestusmärk."
+          "foto_litsents": "CC BY 3.0",
+          "kirjeldus": "Poolsaare tipus, mille lähedal toimus 1941. aasta augustis Juminda miinilahing; neemel on mälestusmärk.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         },
         {
           "id": "keri",
@@ -147,7 +152,8 @@
           "foto_autor": "Ivo Kruusamägi",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Keri_tuletorn.JPG",
           "foto_litsents": "CC BY-SA 3.0",
-          "kirjeldus": "Aastail 1907-1912 põles torni tuli saare puurkaevust tulnud maagaasil - omal ajal haruldane lahendus."
+          "kirjeldus": "Aastail 1907-1912 põles torni tuli saare puurkaevust tulnud maagaasil - omal ajal haruldane lahendus.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by-sa/3.0"
         },
         {
           "id": "prangli-loode",
@@ -241,8 +247,9 @@
           "foto": "images/tallinn-alumine.jpg",
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Tallinna_alumine_tuletorn_2008.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Sihipaari madalam torn, mis juhatab laevu Tallinna lahte; üks vanemaid linnas säilinuid."
+          "foto_litsents": "CC BY 3.0",
+          "kirjeldus": "Sihipaari madalam torn, mis juhatab laevu Tallinna lahte; üks vanemaid linnas säilinuid.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         },
         {
           "id": "tallinn-ulemine",
@@ -260,8 +267,9 @@
           "foto": "images/tallinn-ulemine.jpg",
           "foto_autor": "Johan Viirok",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Tallinna_%C3%BClemine_tuletorn_2011.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Sihipaari kõrgem torn linna kohal - üks väheseid tuletorne, kuhu saab pealinnas sisse astuda."
+          "foto_litsents": "CC BY 2.0",
+          "kirjeldus": "Sihipaari kõrgem torn linna kohal - üks väheseid tuletorne, kuhu saab pealinnas sisse astuda.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/2.0"
         },
         {
           "id": "vahemadala",
@@ -298,8 +306,9 @@
           "foto": "images/naissaar.jpg",
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Naissaare_tuletorn_2006.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Saare põhjatipus; eelmine torn hävis sõjas. Naissaarele viib suvel regulaarne laevaliin."
+          "foto_litsents": "CC BY 3.0",
+          "kirjeldus": "Saare põhjatipus; eelmine torn hävis sõjas. Naissaarele viib suvel regulaarne laevaliin.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         },
         {
           "id": "suurupi-alumine",
@@ -336,8 +345,9 @@
           "foto": "images/suurupi-ulemine.jpg",
           "foto_autor": "Koolipoiss",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Suurupi_tuletorn.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Paekivist torn, Eesti vanuselt teine töötav tuletorn Kõpu järel. Suvel avatud külastuspäevadel."
+          "foto_litsents": "CC BY-SA 4.0",
+          "kirjeldus": "Paekivist torn, Eesti vanuselt teine töötav tuletorn Kõpu järel. Suvel avatud külastuspäevadel.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by-sa/4.0"
         },
         {
           "id": "pakri",
@@ -374,8 +384,9 @@
           "foto": "images/osmussaare.jpg",
           "foto_autor": "Metsavend",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Osmussaaremajakas1.JPG",
-          "foto_litsents": "",
-          "kirjeldus": "Nelinurkne betoontorn saarel, kust rootsi kogukond 1940. aastal lahkus; paadiga Dirhamist."
+          "foto_litsents": "CC BY-SA 4.0",
+          "kirjeldus": "Nelinurkne betoontorn saarel, kust rootsi kogukond 1940. aastal lahkus; paadiga Dirhamist.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by-sa/4.0"
         }
       ]
     },
@@ -401,7 +412,8 @@
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Paslepa_alumine_tulepaak_2008.jpg",
           "foto_litsents": "CC BY 3.0",
-          "kirjeldus": "Laternaruumi ja rõduga valge betoontorn."
+          "kirjeldus": "Laternaruumi ja rõduga valge betoontorn.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         },
         {
           "id": "paslepa-ulemine",
@@ -458,7 +470,8 @@
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Norrby_%C3%BClemine_tuletorn_2011.jpg",
           "foto_litsents": "CC BY 3.0",
-          "kirjeldus": ""
+          "kirjeldus": "",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         },
         {
           "id": "paralepa-alumine",
@@ -495,8 +508,9 @@
           "foto": "images/paralepa-ulemine.jpg",
           "foto_autor": "Jaan Rebane",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Paralepa_rear_lighthouse_2009.jpg",
-          "foto_litsents": "",
-          "kirjeldus": ""
+          "foto_litsents": "Public domain",
+          "kirjeldus": "",
+          "foto_litsents_url": ""
         },
         {
           "id": "rukkirahu",
@@ -514,8 +528,9 @@
           "foto": "images/rukkirahu.jpg",
           "foto_autor": "HendrixEesti",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Rukkirahu_island_2.jpg",
-          "foto_litsents": "",
-          "kirjeldus": ""
+          "foto_litsents": "CC BY-SA 3.0",
+          "kirjeldus": "",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by-sa/3.0/"
         },
         {
           "id": "harilaiu",
@@ -552,8 +567,9 @@
           "foto": "images/saxby.jpg",
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Vormsi_tuletorn_2011.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Malmtorn Vormsi loodetipus; torni jalamil on väike kohvik ja rannaala."
+          "foto_litsents": "CC BY 3.0",
+          "kirjeldus": "Malmtorn Vormsi loodetipus; torni jalamil on väike kohvik ja rannaala.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         },
         {
           "id": "hiiessaare",
@@ -591,7 +607,8 @@
           "foto_autor": "MinuHiiumaa",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Tahkuna_tuletorn_Hiiumaal%2C_p%C3%A4ikeseloojanguvalguses.jpg",
           "foto_litsents": "CC BY-SA 3.0 ee",
-          "kirjeldus": "Malmtorn osteti 1871. aastal Pariisi maailmanäituselt ja püstitati Hiiumaa põhjatippu."
+          "kirjeldus": "Malmtorn osteti 1871. aastal Pariisi maailmanäituselt ja püstitati Hiiumaa põhjatippu.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by-sa/3.0/ee/deed.en"
         },
         {
           "id": "kopu",
@@ -610,7 +627,8 @@
           "foto_autor": "Hiiumaamudeliklubi",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:K%C3%B5pu_tuletorn._Vaade_%C3%BClevalt.jpg",
           "foto_litsents": "CC BY-SA 3.0",
-          "kirjeldus": "Läänemere vanim tuletorn ja üks maailma vanimaid pidevalt töötavaid. Tuli põleb 102 meetri kõrgusel merepinnast."
+          "kirjeldus": "Läänemere vanim tuletorn ja üks maailma vanimaid pidevalt töötavaid. Tuli põleb 102 meetri kõrgusel merepinnast.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by-sa/3.0"
         },
         {
           "id": "ristna",
@@ -628,8 +646,9 @@
           "foto": "images/ristna.jpg",
           "foto_autor": "Monika mich",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Ristna_tuletorn_vaatega_surfiparadiisile.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Prantsusmaal valmistatud punane malmtorn poolsaare läänetipus, kohe Ristna ranna kõrval."
+          "foto_litsents": "CC BY-SA 4.0",
+          "kirjeldus": "Prantsusmaal valmistatud punane malmtorn poolsaare läänetipus, kohe Ristna ranna kõrval.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by-sa/4.0"
         },
         {
           "id": "emmaste-alumine",
@@ -768,8 +787,9 @@
           "foto": "images/vilsandi.jpg",
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Vilsandi_tuletorn_2008.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Vilsandi rahvuspargis, Eesti vanimal kaitsealal. Saarele pääseb paadiga või madalveega jalgsi juhi saatel."
+          "foto_litsents": "CC BY 3.0",
+          "kirjeldus": "Vilsandi rahvuspargis, Eesti vanimal kaitsealal. Saarele pääseb paadiga või madalveega jalgsi juhi saatel.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         },
         {
           "id": "lou-alumine",
@@ -842,10 +862,11 @@
           "tuup": "Tuletorn",
           "ligipaas": null,
           "foto": "images/sorve.jpg",
-          "foto_autor": "Julia",
+          "foto_autor": "Ilja Smirnov",
           "foto_allikas": "",
-          "foto_litsents": "",
-          "kirjeldus": "248 trepiastet säärel, kus Läänemeri kolmelt poolt ümber. Eelmine torn hävis 1944. aasta lahingutes."
+          "foto_litsents": "CC BY 4.0",
+          "kirjeldus": "248 trepiastet säärel, kus Läänemeri kolmelt poolt ümber. Eelmine torn hävis 1944. aasta lahingutes.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/4.0/"
         },
         {
           "id": "kaavi",
@@ -863,8 +884,9 @@
           "foto": "images/kaavi.jpg",
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Kaavi_tuletorn_2008.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Madal torn Sõrve poolsaare kaguküljel, Läänemere ja Liivi lahe vahelisel rannikul."
+          "foto_litsents": "CC BY 3.0",
+          "kirjeldus": "Madal torn Sõrve poolsaare kaguküljel, Läänemere ja Liivi lahe vahelisel rannikul.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         },
         {
           "id": "abruka",
@@ -901,8 +923,9 @@
           "foto": "images/saaretuki.jpg",
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:S%C3%A4%C3%A4retuka_tuletorn_2008.jpg",
-          "foto_litsents": "",
-          "kirjeldus": ""
+          "foto_litsents": "CC BY 3.0",
+          "kirjeldus": "",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         },
         {
           "id": "kubassaare",
@@ -920,8 +943,9 @@
           "foto": "images/kubassaare.jpg",
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:K%C3%BCbassaare_tuletorn_2008.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Saaremaa idatipus, hüljeste lemmikpaiga lähedal; viimane lõik tuleb läbida jalgsi."
+          "foto_litsents": "CC BY 3.0",
+          "kirjeldus": "Saaremaa idatipus, hüljeste lemmikpaiga lähedal; viimane lõik tuleb läbida jalgsi.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         }
       ]
     },
@@ -966,7 +990,8 @@
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Kihnu_tuletorn_2008.jpg",
           "foto_litsents": "CC BY 3.0",
-          "kirjeldus": "Inglismaal valatud malmtorn, mis toodi kohale osade kaupa ja pandi saarel kokku."
+          "kirjeldus": "Inglismaal valatud malmtorn, mis toodi kohale osade kaupa ja pandi saarel kokku.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         },
         {
           "id": "manilaid",
@@ -1003,8 +1028,9 @@
           "foto": "images/sorgu.jpg",
           "foto_autor": "Pille Priks",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Tuletorn_Sorgul.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Pisikesel saarel Kihnu lähedal; saar kuulub Kihnu valda ja on looduskaitse all."
+          "foto_litsents": "CC BY-SA 4.0",
+          "kirjeldus": "Pisikesel saarel Kihnu lähedal; saar kuulub Kihnu valda ja on looduskaitse all.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by-sa/4.0"
         },
         {
           "id": "ruhnu",
@@ -1022,8 +1048,9 @@
           "foto": "images/ruhnu.jpg",
           "foto_autor": "Jaan Künnap",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Ruhnu_tuletorn_09.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Prantsusmaalt tellitud malmtorn; rahvapärimus seob selle Gustave Eiffeli töökojaga."
+          "foto_litsents": "CC BY-SA 4.0",
+          "kirjeldus": "Prantsusmaalt tellitud malmtorn; rahvapärimus seob selle Gustave Eiffeli töökojaga.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by-sa/4.0"
         }
       ]
     },
@@ -1046,10 +1073,11 @@
           "tuup": "Tuletorn",
           "ligipaas": null,
           "foto": "images/rannapungerja.jpg",
-          "foto_autor": "Julia",
+          "foto_autor": "Ilja Smirnov",
           "foto_allikas": "",
-          "foto_litsents": "",
-          "kirjeldus": "Madal torn liivase ranna ja jõesuudme juures, tee ääres Jõhvi-Tartu suunal."
+          "foto_litsents": "CC BY 4.0",
+          "kirjeldus": "Madal torn liivase ranna ja jõesuudme juures, tee ääres Jõhvi-Tartu suunal.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/4.0/"
         },
         {
           "id": "ninakula",
@@ -1067,8 +1095,9 @@
           "foto": "images/ninakula.jpg",
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Ninak%C3%BCla_tuletorn_2007.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Vanausuliste küla kohal, sibulatee ääres Peipsi kaldal."
+          "foto_litsents": "CC BY 3.0",
+          "kirjeldus": "Vanausuliste küla kohal, sibulatee ääres Peipsi kaldal.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         },
         {
           "id": "mehikoorma",
@@ -1086,8 +1115,9 @@
           "foto": "images/mehikoorma.jpg",
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Mehikoorma_tuletorn_2007.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Lämmijärve kitsaima koha juures; üks väheseid siseveetuletorne Eestis."
+          "foto_litsents": "CC BY 3.0",
+          "kirjeldus": "Lämmijärve kitsaima koha juures; üks väheseid siseveetuletorne Eestis.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         }
       ]
     },
@@ -1113,7 +1143,8 @@
           "foto_autor": "Rene Seeman",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:K%C3%A4smu_tuletorn%2C.JPG",
           "foto_litsents": "CC BY-SA 3.0 ee",
-          "kirjeldus": "Üks Eesti väiksemaid tuletorne, madal valge torn kaptenite küla rannajoonel."
+          "kirjeldus": "Üks Eesti väiksemaid tuletorne, madal valge torn kaptenite küla rannajoonel.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by-sa/3.0/ee/deed.en"
         },
         {
           "id": "kiipsaare",
@@ -1131,8 +1162,9 @@
           "foto": "images/kiipsaare.jpg",
           "foto_autor": "Tuderna",
           "foto_allikas": "https://commons.wikimedia.org/wiki/File:Kiipsaare_tuletorn_2007.jpg",
-          "foto_litsents": "",
-          "kirjeldus": "Eesti viltune torn: rannajoon on taandunud ja torn seisab nüüd vees, kaldenurk muutub aastatega. Parklast umbes 5 km jalgsi, vaadelda saab vaid eemalt."
+          "foto_litsents": "CC BY 3.0",
+          "kirjeldus": "Eesti viltune torn: rannajoon on taandunud ja torn seisab nüüd vees, kaldenurk muutub aastatega. Parklast umbes 5 km jalgsi, vaadelda saab vaid eemalt.",
+          "foto_litsents_url": "https://creativecommons.org/licenses/by/3.0"
         },
         {
           "id": "laidunina",
